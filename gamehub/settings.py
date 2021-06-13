@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'pages',
     'accounts',
 ]
 
@@ -76,10 +77,15 @@ WSGI_APPLICATION = 'gamehub.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'gamehub_db',
+        'USER': 'postgres',
+        'PASSWORD': 'jon123',
+        'HOST': '',
+        'PORT': '5432',
     }
 }
+
 
 
 # Password validation
