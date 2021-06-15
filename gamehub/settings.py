@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'social_django',
     'pages',
     'accounts',
+    'posts',
+    'profiles',
 ]
 
 MIDDLEWARE = [
