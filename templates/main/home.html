@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+  
+{% endblock title %}
+
+{% block content %}
+  {{hello}}
+  <br>
+  {{user}}
+
+  <!-- STEAM AUTH -->
+  <a href="{% url "social:begin" "steam" %}">Steam</a>
+  <!--  -->
+{% endblock content %}
+
+{% block scripts %}
+  <script>
+      $(document).ready(function(){
+          console.log('working')
+      })
+  </script>
+{% endblock scripts %}

@@ -7,10 +7,29 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>MAIN PAGE</h1>
+    {% extends "base.html" %}
+
+    {% block title %}
+    
+    {% endblock title %}
+
+    {% block content %}
+    {{hello}}
+    <br>
+    {{user}}
 
     <!-- STEAM AUTH -->
     <a href="{% url "social:begin" "steam" %}">Steam</a>
-    <!--  -->
+    <!-- STEAM AUTH -->
+
+    {% endblock content %}
+
+    {% block scripts %}
+    <script>
+        $(document).ready(function(){
+            console.log('working')
+        })
+    </script>
+    {% endblock scripts %}
 </body>
 </html>
