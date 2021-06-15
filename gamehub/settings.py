@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -68,7 +69,7 @@ ROOT_URLCONF = 'gamehub.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR,'templates'],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,6 +139,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static')
+]
+
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn','static_root')
+
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn','media_root')
+
+MEDIA_URL = '/media/'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -150,4 +162,3 @@ SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 SOCIAL_AUTH_STEAM_API_KEY = 'E97C6D6DDC0BD51C3399AFF40A83E04B'
 
 SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
-
