@@ -65,4 +65,8 @@ class Relationship(models.Model):
 class Game(models.Model):
     steam_id = models.ManyToManyField(Profile)
     game_name = models.CharField(max_length=200)
-    creation_date = models.DateTimeField(default=datetime.now, blank = True)
+    description = models.TextField(blank=True)
+    hours_played = models.IntegerField(null=True)
+    release_date = models.DateTimeField(null=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
+    # boolean owned????????????

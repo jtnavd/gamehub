@@ -6,6 +6,30 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gamehub.settings')
 django.setup()
 from django.conf import settings
 
+def gen_url(interface='ISteamUser', 
+            method='GetFriendList', 
+            version='1'):
+    	return f'https://api.steampowered.com/{interface}/{method}/v{version}/'
+
+
+def get_game_list(user, 
+            key=settings.SOCIAL_AUTH_STEAM_API_KEY, 
+            steam_id='76561197972495328'):
+    steam_id = user.social_auth.first().extra_data['player']['steamid']
+    url = gen_url(interface='IPlayerService', method='GetOwnedGames')
+    print(url)
+    params = {
+        'key':key,
+        'steamid':steam_id,
+    }
+    headers = {
+        'Content-Type':'application/x-www-form-urlencoded'
+    }
+    response = requests.get(url, params=params, headers=headers)
+    print(response.status_code)
+    
+    games_list = response.json()['response']['games']
+
 def index(request):
     return render(request, 'index.html')
 
@@ -15,19 +39,13 @@ def login(request):
 def home_view(request):
     user = request.user
     hello = 'hello world'
-
+    get_game_list(request.user)
     context = {
         'user_t':user,
         'hello' :hello,
     }
     return render(request, 'main/home.html', context)
 
-def gen_url(interface='ISteamUser', 
-            method='GetFriendList', 
-            version='1', 
-            key=settings.SOCIAL_AUTH_STEAM_API_KEY, 
-            steam_id='76561197972495328'):
-    	return f'https://api.steampowered.com/{interface}/{method}/v{version}/'
 
 # use variable to call differents informations
 url = gen_url()
@@ -37,11 +55,6 @@ requests.get(url)
 # get information into db
 url = gen_url(method='GetPlayerBans')
 gen_url(interface='ISteamUserStats', method='GetUserStatsForGame', version='2')
-
-# gen_url(interface='ISteamUser', method='CheckAppOwnership', version='2')
-print(gen_url()) 
-
-
 
 
 
