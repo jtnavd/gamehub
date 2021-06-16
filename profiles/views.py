@@ -17,5 +17,7 @@ def my_profile_view(request):
         'form': form,
         'confirm': confirm,
     }
-
     return render(request, 'profiles/myprofile.html', context)
+
+def home(request):
+    return render(request, 'main/home.html')

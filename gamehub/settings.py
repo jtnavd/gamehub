@@ -150,12 +150,10 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn','media_root')
 
 MEDIA_URL = '/media/'
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
@@ -163,3 +161,5 @@ SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 SOCIAL_AUTH_STEAM_API_KEY = 'E97C6D6DDC0BD51C3399AFF40A83E04B'
 
 SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
+
+LOGIN_REDIRECT_URL = 'profiles:home'

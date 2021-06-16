@@ -9,6 +9,9 @@ from django.conf import settings
 def index(request):
     return render(request, 'index.html')
 
+def login(request):
+    return render(request, 'login.html')
+
 def home_view(request):
     user = request.user
     hello = 'hello world'

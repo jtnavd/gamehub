@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pages.urls')),
     path('', include('social_django.urls', namespace='social')),
-    path('profiles/', include('profiles.urls',namespace='profiles'))
+    path('profiles/', include('profiles.urls',namespace='profiles')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
