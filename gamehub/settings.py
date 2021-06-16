@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'pages',
-    'accounts',
     'posts',
     'profiles',
 ]
@@ -93,7 +92,7 @@ WSGI_APPLICATION = 'gamehub.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gamehub_db',
+        'NAME': 'gamehub',
         'USER': 'postgres',
         'PASSWORD': 'jon123',
         'HOST': '',
