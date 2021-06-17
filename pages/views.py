@@ -43,7 +43,7 @@ def login(request):
 
 def home_view(request):
     user = request.user
-    get_game_list(request.user)
+    # get_game_list(request.user)
     context = {
         'user_t':user,
         # 'hello' :hello,
