@@ -6,8 +6,6 @@ from django.template.defaultfilters import slugify
 from datetime import datetime
 
 class Profile(models.Model):
-    # first_name = models.CharField(max_length=200, blank=True)
-    # last_name = models.CharField(max_length=200, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(default='no bio...', max_length=500)
     # email = models.EmailField(max_length=200, blank=True)
@@ -28,6 +26,27 @@ class Profile(models.Model):
 
     def get_friends_number(self):
         return self.friends.all().count()
+
+    def get_post_numder(self):
+        return self.posts.all().count().count()
+
+    def get_all_authors_post(self):
+        return self.posts.all()
+
+    def get_likes_given(self):
+        likes = self.like_set.all()
+        total_liked = 0
+        for i in likes:
+            if i.value=='like':
+                total_liked += 1
+        return total_liked
+
+    # def get_likes_recieved(self):
+    #     posts = self.posts.all()
+    #     total_posts = 0
+    #     for i in posts:
+    #         total_liked += i.likes.all().count()
+    #     return total_liked
 
     def __str__(self):
         return f"{self.user.username}-{self.created.strftime('%d-%m-%y')}"

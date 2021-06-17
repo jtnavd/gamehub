@@ -30,6 +30,11 @@ def get_game_list(user,
     
     games_list = response.json()['response']['games']
 
+# ##############################################################################################
+def get_game_name(appid, name):
+    
+    pass
+
 def index(request):
     return render(request, 'index.html')
 
@@ -38,13 +43,13 @@ def login(request):
 
 def home_view(request):
     user = request.user
-    hello = 'hello world'
     get_game_list(request.user)
     context = {
         'user_t':user,
-        'hello' :hello,
+        # 'hello' :hello,
     }
     return render(request, 'main/home.html', context)
+
 
 
 # use variable to call differents informations
