@@ -1,11 +1,11 @@
 body {
-    background: #f8f8f8 !important;
+    background: #4b4b4b !important;
 }
 
 .nav{
     border-radius: 0px !important;
     padding: 10px 0 10px 0 !important;
-    background-color:#395afc !important;
+    background-color:#00940c !important;
 }
 
 .mb-7{
@@ -21,4 +21,17 @@ margin-bottom: 7px !important
     height: 300px !important;
     top: 200px !important;
     font-size: 20px !important;
+}
+
+.bwhite-lg {
+    background-color: transparent !important;
+}
+
+.bwhite-sm {
+    background-color: transparent !important;
+    width: 10px !important;
+}
+
+.comment-box {
+    display: none;
 }

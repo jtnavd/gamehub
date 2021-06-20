@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from .models import Post, Like, Profile
 from .forms import PostModelForm, CommentModelForm
+from django.views.generic import UpdateView, DeleteView
+from django.contrib import messages
 
 def post_comment_create_list(request):
     qs = Post.objects.all()
@@ -70,3 +73,30 @@ def like_unlike_post(request):
             like.save()
 
     return redirect('posts:like-post-view')
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'posts/confirm_del.html'
+    success_url = reverse_lazy('posts:main-post-view')
+
+    def get_object(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        obj = Post.objects.get(pk=pk)
+        if not obj.author.user == self.request.user:
+            messages.warning(self.request, 'You need to be the author of the post to delete it!')
+        return obj
+
+class  PostUpdateView(UpdateView):
+    form_class = PostModelForm
+    model = Post
+    template_name = 'posts/update.html'
+    success_url = reverse_lazy('posts:main-post-view')
+
+    def form_valid(self, form):
+        profile = Profile.objects.get(user=self.request.user)
+        if form.instance.author == profile:
+            return super().form_valid(form)
+        else:
+            form.add_error(None, "You need to be the author of the post to update it!")
+            return super().form_invalid(form)
