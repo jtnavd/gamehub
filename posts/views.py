@@ -1,9 +1,11 @@
+from django.db.models.aggregates import Count
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .models import Post, Like, Profile
 from .forms import PostModelForm, CommentModelForm
 from django.views.generic import UpdateView, DeleteView
 from django.contrib import messages
+from django.http import JsonResponse
 
 def post_comment_create_list(request):
     qs = Post.objects.all()
@@ -71,6 +73,12 @@ def like_unlike_post(request):
 
             post_obj.save()
             like.save()
+
+        data = {
+            'value':like.value,
+            'likes':post_obj.liked.all().count(),
+        }
+        return JsonResponse(data, safe=False)
 
     return redirect('posts:like-post-view')
 

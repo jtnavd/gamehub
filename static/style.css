@@ -14,8 +14,15 @@ margin-bottom: 7px !important
 
 .mt-5{
     margin-top: 5px !important
-    }
-    
+}
+
+.mb-5{
+    margin-bottom: 5px !important
+}
+
+.w-big{
+    width: 200px !important;
+}
 
 .mymodal{
     height: 300px !important;
