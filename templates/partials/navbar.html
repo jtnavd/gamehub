@@ -1,10 +1,17 @@
+{% url 'posts:main-post-view' as path_to_post %}
+{% url 'posts:my-profile-view' as path_to_myprofile %}
+{% url 'posts:all-profiles-view' as path_to_allprofiles %}
+{% url 'posts:my-invites-view' as path_to_myinvites %}
+{% url 'posts:invite-profiles-view' as path_to_invites %}
+{% url 'posts:send-invite' as path_to_sendinvite %}
+
 <div class="ui inverted menu nav mb-7">
     <div class="ui container">
       <a href="" class="item">
           <h3>Gamehub</h3>
       </a>
       {% if request.user.is_authenticated %}
-      <a href="" class="item">
+      <a href="{{path_to_post}}" class="{% if request.path == path_to_post %}active{% endif %} item">
           Home
       </a>
       {% endif %}
@@ -15,14 +22,14 @@
               <div class="ui floating dropdown icon button teal"> Friends
                   <i class="dropdown icon"></i>
                   <div class="menu">
-                      <a href="" class="item">
+                      <a href="{{path_to_allprofiles}}" class="{% if request.path == path_to_allprofiles %}active{% endif %} item">
                           All Profiles
                       </a>
-                      <a href="" class="item">
+                      <a href="{{path_to_invites}}" class="{% if request.path == path_to_invites %}active{% endif %} item">
                           Send Invites
                       </a>
-                      <a href="" class="item">
-                          Received Invites
+                      <a href="{{path_to_myinvites}}" class="{% if request.path == path_to_myinvites %}active{% endif %} item">
+                          Received Invites &nbsp; <div class="ui purple horizontal label">{{invites_num}}</div>
                       </a>
                   </div>
                </div>
@@ -36,11 +43,10 @@
                   </div>
               </form>
               </div>
-          
-              <a href="" class="item">
-                   {{ request.user }}
-              </a>
-  
+              <a href="{{path_to_myprofile}}" class="{% if request.path == path_to_myprofile %}active{% endif %} item">
+                <img src={{picture.url}} class="ui avatar image">&nbsp;
+                {{ request.user }}
+              </a> 
               <a href="" class="ui item">
                   Logout
               </a>

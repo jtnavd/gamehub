@@ -6,7 +6,10 @@ from .forms import PostModelForm, CommentModelForm
 from django.views.generic import UpdateView, DeleteView
 from django.contrib import messages
 from django.http import JsonResponse
+# from django.contrib.auth.decorators import  login_required
 
+
+# @login_required
 def post_comment_create_list(request):
     qs = Post.objects.all()
     profile = Profile.objects.get(user=request.user)
