@@ -1,11 +1,12 @@
 body {
-    background: #4b4b4b !important;
+    background: #272727 !important;
 }
 
 .nav{
     border-radius: 0px !important;
     padding: 10px 0 10px 0 !important;
     background-color:#00940c !important;
+    /* height: 70px !important; */
 }
 
 .mb-7{

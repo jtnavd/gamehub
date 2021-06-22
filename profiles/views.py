@@ -6,6 +6,7 @@ from .forms import ProfileModelForm
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
 from django.db.models import Q
+from datetime import datetime
 
 def my_profile_view(request):
     profile = Profile.objects.get(user=request.user)

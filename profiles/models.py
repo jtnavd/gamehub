@@ -6,7 +6,7 @@ from .utils import get_random_code
 from django.template.defaultfilters import slugify
 from datetime import datetime
 from django.db.models import Q
-from  django.templatetags.static import static
+from django.templatetags.static import static
 
 class ProfileManager(models.Manager):
     def get_all_profiles_to_invite(self, sender):
@@ -39,8 +39,7 @@ class Profile(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    # Steam related
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+    game_list = models.ManyToManyField('Game')
     steam_id = models.CharField(max_length=200)
 
     objects = ProfileManager()
@@ -90,7 +89,7 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         ex = False
         to_slug = self.slug
-        if self.first_name != self.__initial_first_name or self.last_name != self.__initial_last_name or selg.slug=="":
+        if self.first_name != self.__initial_first_name or self.last_name != self.__initial_last_name or self.slug=="":
             if self.first_name and self.last_name:
                 to_slug = slugify(str(self.user.first_name) + " " + str(self.user.last_name))
                 ex = Profile.objects.filter(slug=to_slug).exists()
@@ -127,10 +126,10 @@ class Relationship(models.Model):
         return f"{self.sender}-{self.receiver}-{self.status}"
 
 class Game(models.Model):
-    steam_id = models.ManyToManyField(Profile)
-    game_name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    hours_played = models.IntegerField(null=True)
-    release_date = models.DateTimeField(null=True)
+    steam_id = models.IntegerField(unique=True)
+    game_name = models.CharField(max_length=200,null=True)
+    description = models.TextField(blank=True, null=True)
+    image = models.URLField(null=True)
+    # hours_played = models.IntegerField(null=True)
+    release_date = models.DateField(null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
-    # boolean owned????????????
