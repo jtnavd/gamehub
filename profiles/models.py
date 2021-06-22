@@ -6,6 +6,7 @@ from .utils import get_random_code
 from django.template.defaultfilters import slugify
 from datetime import datetime
 from django.db.models import Q
+from  django.templatetags.static import static
 
 class ProfileManager(models.Manager):
     def get_all_profiles_to_invite(self, sender):
@@ -26,22 +27,20 @@ class ProfileManager(models.Manager):
         return available
 
     def get_all_profiles(self, me):
-        profiles = Profile.objects.all().exclude(user=me)
-        return profiles
-
+        return Profile.objects.all().exclude(user=me)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(default='no bio...', max_length=500)
     # email = models.EmailField(max_length=200, blank=True)
     country = models.CharField(max_length=200, blank=True)
-    avatar = models.ImageField(default='avatar.png', upload_to='avatar/')
+    avatar = models.ImageField(default=static('css/img/avatar.png'), upload_to='avatar/')
     friends = models.ManyToManyField(User, blank=True, related_name='friends')
     slug = models.SlugField(unique=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     # Steam related
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # user = models.OneToOneField(User, on_delete=models.CASCADE)
     steam_id = models.CharField(max_length=200)
 
     objects = ProfileManager()
@@ -59,7 +58,7 @@ class Profile(models.Model):
         return self.friends.all().count()
 
     def get_post_numder(self):
-        return self.posts.all().count().count()
+        return self.posts.all().count()
 
     def get_all_authors_post(self):
         return self.posts.all()
@@ -76,16 +75,17 @@ class Profile(models.Model):
         posts = self.posts.all()
         total_liked = 0
         for i in posts:
-            total_liked += i.likes.all().count()
+            total_liked += i.liked.all().count()
         return total_liked
 
+    # init profile name ------verify
     __initial_first_name = None
     __initial_last_name = None
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.__initial_first_name = self.first_name
-        self.__initial_last_name = self.last_name
+        self.__initial_first_name = self.user.first_name
+        self.__initial_last_name = self.user.last_name
 
     def save(self, *args, **kwargs):
         ex = False

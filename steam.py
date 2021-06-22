@@ -28,6 +28,8 @@ gen_url(interface='ISteamUserStats', method='GetUserStatsForGame', version='2')
 gen_url(interface='ISteamUser', method='CheckAppOwnership', version='2')
 print(gen_url())
 
+
+
 # # steam_id
 # # 76561197972495328
 

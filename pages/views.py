@@ -18,6 +18,7 @@ def get_game_list(user,
     steam_id = user.social_auth.first().extra_data['player']['steamid']
     url = gen_url(interface='IPlayerService', method='GetOwnedGames')
     print(url)
+
     params = {
         'key':key,
         'steamid':steam_id,
@@ -30,11 +31,22 @@ def get_game_list(user,
     
     games_list = response.json()['response']['games']
 
+    game_url = gen_url(interface='IStoreService', method='GetAppInfo')
+
+    # for game in game_list:
+    #     params = {
+    #         'key':key,
+    #         'appid':appid,
+    #     }
+    #     response = requests.get(url, params=params)
+    #     print(game)
+
+
+# https://api.steampowered.com/IStoreService/GetAppInfo/v1/?
 # ##############################################################################################
 def get_game_name(appid, name):
-    
     pass
-
+    
 def index(request):
     return render(request, 'index.html')
 
@@ -43,7 +55,7 @@ def login(request):
 
 def home_view(request):
     user = request.user
-    # get_game_list(request.user)
+    get_game_list(request.user)
     context = {
         'user_t':user,
         # 'hello' :hello,

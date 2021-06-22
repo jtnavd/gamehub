@@ -12,4 +12,4 @@ def invitations_receiver_number(request):
         profile_obj = Profile.objects.get(user=request.user)
         qs_count = Relationship.objects.invitations_received(profile_obj).count()
         return {'invites_num':qs_count}
-    return {}
+    return {} 

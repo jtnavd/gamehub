@@ -53,7 +53,13 @@ def reject_invitation(request):
 
 
 def home(request):
-    return render(request, 'main/home.html')
+    if not request.user.is_authenticated:
+        return render(request, 'main/home.html')
+
+    else:
+
+        return render(request,'profiles/detail.html', {'object':request.user.profile})
+
 
 def invite_profiles_list_view(request):
     user = request.user

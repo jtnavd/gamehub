@@ -42,7 +42,7 @@
                         </button>
                 </form>
                 {% endif %}
-          {% if bj.user in rel_receiver and request.user not in object.friends.all %}
+          {% if object.user in rel_receiver and request.user not in object.friends.all %}
           <button class="ui disabled button mb-5 w-big"><i class="user icon"></i>Waiting for approval</button>
           {% endif %}
           {% if request.user in object.friends.all %}
@@ -53,7 +53,7 @@
                     Removed from friend
                 </button>
         </form>
-
+        {% endif %}
 
             </div>
             <div class="twelve wide column"></div>
