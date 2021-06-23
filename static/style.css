@@ -1,5 +1,9 @@
+*{
+    font-family: sans-serif;
+}
+
 body {
-    background: #272727 !important;
+    background: #e1e1e1 !important;
 }
 
 .nav{
@@ -10,7 +14,7 @@ body {
 }
 
 .mb-7{
-margin-bottom: 7px !important
+    margin-bottom: 7px !important
 }
 
 .mt-5{
@@ -42,4 +46,43 @@ margin-bottom: 7px !important
 
 .comment-box {
     display: none;
+}
+
+/* LOGIN BUTTON */
+.login{
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    background: #111;
+}
+
+.login button{
+    position: relative;
+    width: 180px;
+    height: 60px;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 60px;
+    letter-spacing: 2px;
+    margin: 20px;
+    transition: 0.5s;
+}
+
+.login button:hover{
+    background: rgb(0, 158, 13) url(img/pixel2.png);
+    transition-delay: 0.8s;
+    animation: pix-animate 0.8s steps(8) forwards;
+}
+
+@keyframes pix-animate {
+    0% {
+        background-position-y: 0;
+    }
+    100% {
+        background-position-y: -480px;
+    }
 }
