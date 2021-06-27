@@ -34,8 +34,8 @@ class Profile(models.Model):
     bio = models.TextField(default='no bio...', max_length=500)
     # email = models.EmailField(max_length=200, blank=True)
     country = models.CharField(max_length=200, blank=True)
-    avatar = models.ImageField(default=static('css/img/avatar.png'), upload_to='avatar/')
-    friends = models.ManyToManyField(User, blank=True, related_name='friends')
+    avatar = models.URLField(default=static('css/img/avatar.png'))
+    friends = models.ManyToManyField('self', blank=True, symmetrical=False)
     slug = models.SlugField(unique=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -50,8 +50,11 @@ class Profile(models.Model):
     def get_absolute_url(self):
         return reverse("profiles:profile-detail-view", kwargs={"slug": self.slug})
 
-    def get_friends(self):
-        return self.friends.all()
+    def get_profile_picture(self):
+        if self.avatar:
+            return self.avatar.url
+        else:
+            return static('css/img/avatar.png')
 
     def get_friends_number(self):
         return self.friends.all().count()
@@ -78,29 +81,29 @@ class Profile(models.Model):
         return total_liked
 
     # init profile name ------verify
-    __initial_first_name = None
-    __initial_last_name = None
+    # __initial_first_name = None
+    # __initial_last_name = None
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.__initial_first_name = self.user.first_name
-        self.__initial_last_name = self.user.last_name
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.__initial_first_name = self.user.first_name
+    #     self.__initial_last_name = self.user.last_name
 
-    def save(self, *args, **kwargs):
-        ex = False
-        to_slug = self.slug
-        if self.first_name != self.__initial_first_name or self.last_name != self.__initial_last_name or self.slug=="":
-            if self.first_name and self.last_name:
-                to_slug = slugify(str(self.user.first_name) + " " + str(self.user.last_name))
-                ex = Profile.objects.filter(slug=to_slug).exists()
-                while ex:
-                    to_slug = slugify(to_slug + " " + str(get_random_code()))
-                    ex = Profile.objects.filter(slug=to_slug).exists()
+    # def save(self, *args, **kwargs):
+    #     ex = False
+    #     to_slug = self.slug
+    #     if self.first_name != self.__initial_first_name or self.last_name != self.__initial_last_name or self.slug=="":
+    #         if self.first_name and self.last_name:
+    #             to_slug = slugify(str(self.user.first_name) + " " + str(self.user.last_name))
+    #             ex = Profile.objects.filter(slug=to_slug).exists()
+    #             while ex:
+    #                 to_slug = slugify(to_slug + " " + str(get_random_code()))
+    #                 ex = Profile.objects.filter(slug=to_slug).exists()
 
-            else:
-                to_slug = str(self.user)
-        self.slug = to_slug
-        super().save(*args, **kwargs)
+    #         else:
+    #             to_slug = str(self.user)
+    #     self.slug = to_slug
+    #     super().save(*args, **kwargs)
 
 
 STATUS_CHOICES = (

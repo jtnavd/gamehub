@@ -22,13 +22,16 @@ def my_profile_view(request):
         'profile':profile,
         'form': form,
         'confirm': confirm,
+        "active_nav": "my-profile-view",
     }
     return render(request, 'profiles/myprofile.html', context)
 
 def invites_received_view(request):
     profile = Profile.objects.get(user=request.user)
     qs = Relationship.objects.invitations_received(profile)
-    context = {'qs': qs}
+    context = {'qs': qs,
+                "active_nav": "my-invites-view",
+    }
 
     return render(request, 'profiles/my_invites.html', context)
 
@@ -41,7 +44,7 @@ def accept_invitation(request):
         if rel.status == 'send':
             rel.status = 'accepted'
             rel.save()
-    return redirect('profile:my-invites-view')
+    return redirect('profile:my-invites-view', context)
 
 def reject_invitation(request):
     if request.method=='POST':
@@ -50,6 +53,7 @@ def reject_invitation(request):
         receiver = Profile.objects.get(user=request.user)
         rel = get_object_or_404(Relationship, sender=sender, receiver=receiver)
         rel.delete()
+        
     return redirect('profile:my-invites-view') 
 
 
@@ -58,7 +62,6 @@ def home(request):
         return render(request, 'main/home.html')
 
     else:
-
         return render(request,'profiles/detail.html', {'object':request.user.profile})
 
 
@@ -71,7 +74,9 @@ def invite_profiles_list_view(request):
         is_empty = True
 
     context = {'qs': results,
-                'is_empty': is_empty,}
+                'is_empty': is_empty,
+                "active_nav": "invite-profiles-view"
+                }
 
     return render(request, 'profiles/to_invite_list.html', context)
 
@@ -79,7 +84,8 @@ def profiles_list_view(request):
     user = request.user
     qs = Profile.objects.get_all_profiles(user)
 
-    context = {'qs': qs}
+    context = {'qs': qs, 
+                "active_nav": "all-profiles-view"}
 
     return render(request, 'profiles/profile_list.html', context)
 
@@ -125,7 +131,6 @@ class ProfileListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['hello'] = "hello world"
         user = User.objects.get(username=self.request.user)
         profile = Profile.objects.get(user=user)
         rel_r = Relationship.objects.filter(sender=profile)

@@ -7,11 +7,11 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gamehub.settings')
 django.setup()
 from django.conf import settings
 from profiles.models import Game, Profile
+from django.contrib.auth.models import User
 
-# user authenticaTtor
-
-def gen_url(interface='ISteamUser', 
-            method='GetFriendList', 
+# user authenticator
+def gen_url(interface='ISteamUser',
+            method='GetFriendList',
             version='1'):
     	return f'https://api.steampowered.com/{interface}/{method}/v{version}/'
 
@@ -30,28 +30,22 @@ def get_game_list(user,
     headers = {
         'Content-Type':'application/x-www-form-urlencoded'
     }
-    response = requests.get(url, params=params, headers=headers)
-    print(response.status_code)
 
-    # game_url = gen_url(interface='IStoreService', method='GetAppInfo') <--- old
+    response = requests.get(url, params=params, headers=headers)
     game_url = 'https://store.steampowered.com/api/appdetails'
-    print(game_url)
- 
     games_list = response.json()['response']['games']
 
     for game in games_list:
-        print(game)
         params = {
-            # 'key':key,
-            # 'steamid':steam_id,
             'appids':game['appid'],
-            
         }
+
+        if Game.objects.filter(steam_id=game['appid']).exists():
+            continue
+
         response = requests.get(game_url, headers=headers, params=params)
-        # print(response.json())
         if response.status_code == 200:
             app_id = str(game['appid'])
-            # if response.json()[game['appid']]:
             game_data=response.json()[app_id].get("data")
             if game_data:
                 new_game, created = Game.objects.get_or_create(steam_id=game['appid'])
@@ -68,12 +62,38 @@ def get_game_list(user,
                         pass 
                     new_game.save()
 
+def get_user_detail( user,
+            key=settings.SOCIAL_AUTH_STEAM_API_KEY, 
+            steam_id='76561197972495328'):
+    user = User.objects.get()
+    steam_id = user.social_auth.first().extra_data['player']['steamid']
+    url = gen_url(interface='ISteamUser', method='GetPlayerSummaries', version='2')
 
-# use variable to call differents informations
+    params = {
+        'key':key,
+        'steamids':steam_id,
+    }
+    headers = {
+        'Content-Type':'application/x-www-form-urlencoded'
+    }
+
+    response = requests.get(url, params=params, headers=headers)
+    user_data=response.json()['response']
+    print(response.json())
+    if user_data:
+        new_user, created = Profile.objects.get_or_create(key=key, steam_id=steam_id)
+        if created:
+            new_user.steam_id = user_data['steamid']
+            new_user.slug = user_data['personaname']
+            new_user.avatar = user_data['avatar']
+            # ###### define new api
+            # new_user.country = user_data['']
+            # new_user.bio = user_data['']
+            # new_user.friends = user_data['']
+            new_user.save()
+
 url = gen_url()
-# send request to info
 requests.get(url)
 
-# get information into db
 url = gen_url(method='GetPlayerBans')
 gen_url(interface='ISteamUserStats', method='GetUserStatsForGame', version='2')

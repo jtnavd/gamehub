@@ -3,40 +3,70 @@
 }
 
 body {
-    background: #e1e1e1 !important;
+    background: #e1e1e1;
+}
+
+.login{
+    
 }
 
 .nav{
-    border-radius: 0px !important;
-    padding: 10px 0 10px 0 !important;
-    background-color:#00940c !important;
-    /* height: 70px !important; */
+    border-radius: 0px;
+    padding: 10px 0 10px 0;
+    background-color:#00940c;
+    height: 70px;
 }
 
+.sun{
+    background: #fff;
+}
+/* 
+input[type='checkbox']{
+    -webkit-appearance: none;
+    visibility: hidden;
+    display: none;
+}
+
+.check{
+    position: relative;
+    display: block;
+    width: 70px; height: 30px;
+    background: #092c3e;
+    cursor: pointer;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: ease-in 0.5s;
+}
+
+input[type="checkbox"]:checked ~ .check
+{
+    background: #fff;
+} */
+
 .mb-7{
-    margin-bottom: 7px !important
+    margin-bottom: 7px;
 }
 
 .mt-5{
-    margin-top: 5px !important
+    margin-top: 5px;
 }
 
 .mb-5{
-    margin-bottom: 5px !important
+    margin-bottom: 5px;
 }
 
 .w-big{
-    width: 200px !important;
+    width: 200px;
 }
 
 .mymodal{
-    height: 300px !important;
-    top: 200px !important;
-    font-size: 20px !important;
+    height: 300px;
+    top: 200px;
+    font-size: 20px;
 }
 
 .bwhite-lg {
-    background-color: transparent !important;
+    background-color: transparent;
 }
 
 .bwhite-sm {
@@ -86,3 +116,5 @@ body {
         background-position-y: -480px;
     }
 }
+
+

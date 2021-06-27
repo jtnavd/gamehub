@@ -15,29 +15,13 @@ def index(request):
 def login(request):
     return render(request, 'login.html')
 
-def home_view(request):
-    user = request.user
-    get_game_list(request.user)
-    context = {
-        'user_t':user,
-        # 'hello' :hello,
-    }
-    return render(request, 'main/home.html', context)
-
-
-# RESPONSE TEST
-# from django.http import HttpResponse
-# from django.shortcuts import render
-
 # def home_view(request):
 #     user = request.user
-#     hello = 'hello world'
-
+#     get_game_list(request.user)
 #     context = {
 #         'user_t':user,
-#         'hello' :hello,
+#         # 'hello' :hello,
 #     }
 #     return render(request, 'main/home.html', context)
-#     return HttpResponse('Hello world')
 
 

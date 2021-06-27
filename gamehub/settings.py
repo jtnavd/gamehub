@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import django_heroku
+import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure-%s!_o6twtu48z%i$2s6r4wi(oi2x4cwi11kb-m&fei*c1mc3z1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -167,3 +169,7 @@ SOCIAL_AUTH_STEAM_API_KEY = 'E97C6D6DDC0BD51C3399AFF40A83E04B'
 SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
 
 LOGIN_REDIRECT_URL = 'profiles:home'
+
+# DEPLOYMENT
+django_heroku.settings(locals())
+

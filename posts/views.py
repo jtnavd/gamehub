@@ -47,7 +47,8 @@ def post_comment_create_list(request):
         'profile': profile,
         'p_form': p_form,
         'c_form': c_form,
-        'post_added': post_added
+        'post_added': post_added,
+        'active_nav': 'list-of-posts'
     }
 
     return render(request, 'posts/main.html', context)
