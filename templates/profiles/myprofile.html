@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
 {% block title %}
-  my profile
 {% endblock title %}
 
 {% block content %}
@@ -58,14 +58,6 @@
         <td>{{profile.user}}</td>
       </tr>
       <tr>
-        <td>frist name</td>
-        <td>{{profile.first_name}}</td>
-      </tr>
-      <tr>
-        <td>last name</td>
-        <td>{{profile.last_name}}</td>
-      </tr>
-      <tr>
         <td>bio</td>
         <td>{{profile.bio}}</td>
       </tr>
@@ -74,7 +66,7 @@
         <td>{{profile.get_friends_number}}</td>
       </tr>
       <tr>
-        <td>last name</td>
+        <td>friends list:</td>
         <ul>
           {% for friend in profile.get_friends %}
           <li>{{friend}}</li>
@@ -97,7 +89,6 @@
   </table>
 </div>
 </div>
-
 </div>
 
 {% endblock content %}

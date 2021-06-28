@@ -1,3 +1,4 @@
+{% load static %}
 {% extends "base.html" %}
 
 {% block title %}
@@ -6,7 +7,10 @@
 
 {% block content %}
     <h1>Games</h1>
-    {% for game in games_list %}
-      <h2>.name</h2>
-    {% endfor %}
+    <div class="container">
+      {% for game in game_list %}
+        <h2>{{game_list.name}}</h2>
+      {% endfor %} 
+    </div>
+    
 {% endblock content %}

@@ -1,11 +1,11 @@
 from django.core.exceptions import MultipleObjectsReturned
 from django.db.models.fields import related_descriptors
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Profile, Relationship
-from .forms import ProfileModelForm
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
-from django.db.models import Q
+from .models import Profile, Relationship
+from .forms import ProfileModelForm
 from datetime import datetime
 
 def my_profile_view(request):
@@ -94,12 +94,6 @@ def profiles_list_view(request):
 class ProfileDetailView(DetailView):
     model = Profile
     template_name = 'profile/detail.html'
-
-    # def get_object(self, slug=None):
-    #     slug = self.kwargs.get('slug')
-    #     profile = Profile.objects.get(slug=slug)
-    #     return profile
-
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -124,7 +118,6 @@ class ProfileDetailView(DetailView):
 class ProfileListView(ListView):
     model = Profile
     template_name = 'profiles/profile_list.html'
-    # context_object_name = 'qs'
 
     def get_queryset(self):
         qs = Profile.objects.get_all_profiles(self.request.user)

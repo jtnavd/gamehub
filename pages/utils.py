@@ -33,9 +33,9 @@ def get_game_list(user,
 
     response = requests.get(url, params=params, headers=headers)
     game_url = 'https://store.steampowered.com/api/appdetails'
-    games_list = response.json()['response']['games']
+    game_list = response.json()['response']['games']
 
-    for game in games_list:
+    for game in game_list:
         params = {
             'appids':game['appid'],
         }
@@ -57,7 +57,6 @@ def get_game_list(user,
                     try :
                         date = datetime.strptime(game_data["release_date"]["date"], "%d %b, %Y")
                         new_game.release_date = date
-                    # “19 Dec, 2008”
                     except ValueError:
                         pass 
                     new_game.save()
@@ -86,10 +85,6 @@ def get_user_detail( user,
             new_user.steam_id = user_data['steamid']
             new_user.slug = user_data['personaname']
             new_user.avatar = user_data['avatar']
-            # ###### define new api
-            # new_user.country = user_data['']
-            # new_user.bio = user_data['']
-            # new_user.friends = user_data['']
             new_user.save()
 
 url = gen_url()

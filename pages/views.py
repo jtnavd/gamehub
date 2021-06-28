@@ -13,15 +13,15 @@ def index(request):
     return render(request, 'index.html')
 
 def login(request):
-    return render(request, 'login.html')
+    context = {
+        'active_nav':'login'
+    }
+    return render(request, 'login.html',context)
 
-# def home_view(request):
-#     user = request.user
-#     get_game_list(request.user)
-#     context = {
-#         'user_t':user,
-#         # 'hello' :hello,
-#     }
-#     return render(request, 'main/home.html', context)
-
-
+def game_list(request, *args, **kwwargs):
+    game_list = Game.objects.all()
+    context = {
+        'game':game_list,
+        'active_nav':"my-game-library"
+    }
+    return render(request, 'gamelist.html', context)
