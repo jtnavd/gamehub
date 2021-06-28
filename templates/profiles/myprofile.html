@@ -13,7 +13,11 @@
   </div>
   <div class="image content">
     <div class="ui medium image">
-      <img src="{{profiles.avatar.url}}">
+      {% if request.user.is_authenticated %}
+        <img src={{request.user.profile.avatar}} class="ui avatar image">&nbsp;
+      {% else %}
+        <img src= {% static "css/img/avatar.png" %}class="ui avatar image">&nbsp;
+      {% endif %}
     </div>
     <div class="description">
       <div class="ui header">Tell us about! </div>

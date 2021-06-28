@@ -2,46 +2,44 @@
     font-family: sans-serif;
 }
 
-body {
-    background: #e1e1e1;
-}
-
+/* LOGIN PAGE */
 .login{
-    
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+    height: 100%; width: 100%;
+    background:rgb(6, 6, 39);
+    color: #fff;
 }
-
-.nav{
-    border-radius: 0px;
-    padding: 10px 0 10px 0;
-    background-color:#00940c;
-    height: 70px;
-}
-
-.sun{
-    background: #fff;
-}
-/* 
-input[type='checkbox']{
-    -webkit-appearance: none;
-    visibility: hidden;
-    display: none;
-}
-
-.check{
+.login-button{
     position: relative;
-    display: block;
-    width: 70px; height: 30px;
-    background: #092c3e;
-    cursor: pointer;
-    border-radius: 20px;
-    overflow: hidden;
-    transition: ease-in 0.5s;
+    width: 180px;height: 60px;
+    background:rgb(6, 6, 39);
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight:500;
+    line-height: 60px;
+    letter-spacing: 2px;
+    margin: 20px;
+    transition: 0.1s;
 }
-
-input[type="checkbox"]:checked ~ .check
-{
-    background: #fff;
-} */
+.login-button:hover{
+    background: url(css/img/pixel2.png);
+    transition-delay:  0.8s;
+    background-size: 180px;
+    animation: animate 0.8s steps(8) forwards;
+}
+@keyframes animate {    
+    0% {
+        background-position-y:0;
+    }
+    100% {
+        background-position-y: -480px;
+    }
+}
 
 .mb-7{
     margin-bottom: 7px;
@@ -70,51 +68,13 @@ input[type="checkbox"]:checked ~ .check
 }
 
 .bwhite-sm {
-    background-color: transparent !important;
-    width: 10px !important;
+    background-color: transparent;
+    width: 10px;
 }
 
 .comment-box {
     display: none;
 }
 
-/* LOGIN BUTTON */
-.login{
-    margin: 0; padding: 0;
-    box-sizing: border-box;
-    align-items: center;
-    min-height: 100vh;
-    flex-direction: column;
-    background: #111;
-}
-
-.login button{
-    position: relative;
-    width: 180px;
-    height: 60px;
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 60px;
-    letter-spacing: 2px;
-    margin: 20px;
-    transition: 0.5s;
-}
-
-.login button:hover{
-    background: rgb(0, 158, 13) url(img/pixel2.png);
-    transition-delay: 0.8s;
-    animation: pix-animate 0.8s steps(8) forwards;
-}
-
-@keyframes pix-animate {
-    0% {
-        background-position-y: 0;
-    }
-    100% {
-        background-position-y: -480px;
-    }
-}
 
 

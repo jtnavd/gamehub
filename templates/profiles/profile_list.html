@@ -13,7 +13,11 @@ my invites
           <div class="ui grid">
               <div class="row">
                   <div class="three wide column">
-                    <img class="ui small circular image" src={obj.avatar.url}>
+                    {% if request.user.is_authenticated %}
+                    <img src={{request.user.profile.avatar}} class="ui avatar image">&nbsp;
+                  {% else %}
+                    <img src= {% static "css/img/avatar.png" %}class="ui avatar image">&nbsp;
+                  {% endif %}
                   </div>
                   <div class="thirteen wide column">
                       <h3>{{obj.user}}</h3>

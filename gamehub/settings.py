@@ -148,6 +148,8 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+# DEPLOYMENT
+django_heroku.settings(locals())
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn','media_root')
 
@@ -167,6 +169,5 @@ SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
 
 LOGIN_REDIRECT_URL = 'profiles:home'
 
-# DEPLOYMENT
-django_heroku.settings(locals())
+
 

@@ -15,19 +15,10 @@ p, span, small{
 	margin: 0 auto;
 	margin-top: 100px;
 	border: 2px solid #e7e7e7;
-	border-radius: 5px;
+	/* border-radius: 5px; */
 	text-align: center;
 	padding: 20px;
 	background-color: #F8F8F8!important;
-}
-
-#profile_pic{
-	display: block;
-	border-radius: 50%;
-	margin: 10px auto;
-	width: 200px;
-	border: 2px solid #e7e7e7;
-
 }
 
 hr{
