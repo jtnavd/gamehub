@@ -80,32 +80,6 @@ class Profile(models.Model):
             total_liked += i.liked.all().count()
         return total_liked
 
-    # init profile name ------verify
-    # __initial_first_name = None
-    # __initial_last_name = None
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.__initial_first_name = self.user.first_name
-    #     self.__initial_last_name = self.user.last_name
-
-    # def save(self, *args, **kwargs):
-    #     ex = False
-    #     to_slug = self.slug
-    #     if self.first_name != self.__initial_first_name or self.last_name != self.__initial_last_name or self.slug=="":
-    #         if self.first_name and self.last_name:
-    #             to_slug = slugify(str(self.user.first_name) + " " + str(self.user.last_name))
-    #             ex = Profile.objects.filter(slug=to_slug).exists()
-    #             while ex:
-    #                 to_slug = slugify(to_slug + " " + str(get_random_code()))
-    #                 ex = Profile.objects.filter(slug=to_slug).exists()
-
-    #         else:
-    #             to_slug = str(self.user)
-    #     self.slug = to_slug
-    #     super().save(*args, **kwargs)
-
-
 STATUS_CHOICES = (
     ('send', 'send'),
     ('acepted', 'accepted'),

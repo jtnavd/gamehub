@@ -1,13 +1,12 @@
-<!-- {% extends "base.html" %} -->
+{% load static %}
 
-{% block title %}
-  Login
-{% endblock title %}
-
+<head>
+  <link rel="stylesheet" type="text/css" href={% static 'style.css' %}>
+</head>
 {% block content %}
   <div>
     <div class="login">
-      <strong><h1>Wecome to Gamehub</h1></strong><br>
+      <strong><h1>Wecome to <br>Gamehub</h1></strong><br>
       <h4>Please, log into your steam account</h4>
         <a href="{% url "social:begin" "steam" %}">
           <button class="login-button">Login</button>

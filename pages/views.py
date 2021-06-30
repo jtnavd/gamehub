@@ -17,11 +17,3 @@ def login(request):
         'active_nav':'login'
     }
     return render(request, 'login.html',context)
-
-def game_list(request, *args, **kwwargs):
-    game_list = Game.objects.all()
-    context = {
-        'game':game_list,
-        'active_nav':"my-game-library"
-    }
-    return render(request, 'gamelist.html', context)

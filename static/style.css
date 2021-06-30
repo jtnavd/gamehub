@@ -1,5 +1,5 @@
 *{
-    font-family: sans-serif;
+    font-family: roboto, sans-serif;
 }
 
 /* LOGIN PAGE */
@@ -72,9 +72,31 @@
     width: 10px;
 }
 
-.comment-box {
-    display: none;
+/* GAME LIBRARY */
+.wrapper{
+    max-height: 600px;
+    display: flex;
+    overflow-x: auto;
 }
 
+.wrapper .card{
+    margin-top:2em;
+    padding: 10px;
+    width: 80vh;
+    background: rgb(48, 50, 59);
+    color: #ccc;
+    text-align: center;
+    overflow-y: scroll;
+}
+ 
+.wrapper .card-image {
+    width: 70vh;
+    }
+/* 
+.card-text{
+    grid-area: text;
+}
 
-
+.card-date{
+    grid-area: date;
+} */

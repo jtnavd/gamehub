@@ -6,30 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    {% extends "base.html" %}
+    <body>
+        {% extends "base.html" %}
 
-    {% block title %}
-    
-    {% endblock title %}
+        {% block title %}
+        
+        {% endblock title %}
 
-    {% block content %}
-    {{hello}}
-    <br>
-    {{user}}
+        {% block content %}
+        <br>
+        {{user}}
+        
 
-    <!-- STEAM AUTH -->
-    <!-- <a href="{% url "social:begin" "steam" %}">Steam</a> -->
-    <!-- STEAM AUTH -->
+        {% endblock content %}
 
-    {% endblock content %}
-
-    {% block scripts %}
-    <script>
-        $(document).ready(function(){
-            console.log('working')
-        })
-    </script>
-    {% endblock scripts %}
-</body>
+        {% block scripts %}
+        <script>
+            $(document).ready(function(){
+                console.log('working')
+            })
+        </script>
+        {% endblock scripts %}
+    </body>
 </html>

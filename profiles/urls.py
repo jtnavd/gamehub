@@ -5,8 +5,8 @@ app_name = 'profiles'
 
 urlpatterns = [
     path('', views.ProfileListView.as_view(), name='all-profiles-view'),
-    path('gamelist/', views.my_profile_view,name='my-profile-view'),
-    path('myprofile/', views.my_profile_view,name='my-game-library'),
+    path('myprofile/', views.my_profile_view,name='my-profile-view'),
+    path('gamelist/', views.game_list,name='my-game-library'),
     path('my-invites/', views.invites_received_view, name='my-invites-view'),
     path('to-invite/', views.invite_profiles_list_view, name='invite-profiles-view'),
     path('send-invite/', views.send_invitation, name='send-invite'),
@@ -15,3 +15,5 @@ urlpatterns = [
     path('my-invites/reject/', views.reject_invitation, name='reject-invite'),
     path('home/', views.home, name='home'),
 ]
+
+

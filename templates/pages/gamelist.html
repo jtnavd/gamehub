@@ -1,16 +1,25 @@
-{% load static %}
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
   Library
 {% endblock title %}
 
 {% block content %}
-    <h1>Games</h1>
-    <div class="container">
-      {% for game in game_list %}
-        <h2>{{game_list.name}}</h2>
-      {% endfor %} 
-    </div>
-    
-{% endblock content %}
+   {% for game in games %}
+    {% if game.game_name %}
+      <div class="wrapper"> 
+        <div class="card"> 
+          <img class="card-image" src="{{game.image}}" alt="">
+          <div class="card-text">
+            <h2>{{game.game_name}}</h2>
+            <p>{{game.description|safe}}</p>
+          </div>
+          <div class="card-date">
+            <h2>release date: {{game.release_date}}</h2>
+          </div>
+        </div> 
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
