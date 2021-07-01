@@ -121,7 +121,7 @@ def send_invitation(request):
         pk= request.POST.get('profile_pk')
         user = request.user
         sender = Profile.objects.get(user=user)
-        receiver = Profile.objects.get(pk=pk)
+        receiver = Profile.objects.get(user=user)
 
         rel = Relationship.objects.create(sender=sender, receiver=receiver, status='send')
         return redirect(request.META.get('HTTP_REFERER'))

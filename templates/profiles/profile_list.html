@@ -29,9 +29,9 @@ my invites
                         <form action="{% url 'profiles:send-invite' %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="profile_pk" value={{bj.pk}}>
-                                <button type="submit" class="ui positive basic button mb-5 w-big"><i class="plus square icon"></i>
+                                <!-- <button type="submit" class="ui positive basic button mb-5 w-big"><i class="plus square icon"></i>
                                     Add friend
-                                </button>
+                                </button> -->
                         </form>
                         {% endif %}
                   {% if bj.user in rel_receiver and request.user not in obj.friends.all %}
